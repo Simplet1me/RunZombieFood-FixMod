@@ -1,0 +1,22 @@
+# Local game, third-party downloads, diagnostics and backups
+/Run!ZombieFoods!/
+/tools/
+/analysis/
+/backups/
+
+# Generated packages (release scripts and source remain tracked)
+/dist/
+/releases/
+
+# Compiled test probes and future build intermediates
+/tests/*.dll
+/tests/*.pdb
+**/bin/
+**/obj/
+
+# Editor and OS files
+.vs/
+*.user
+*.suo
+Thumbs.db
+.DS_Store
