@@ -19,7 +19,7 @@ try {
     Copy-Item -LiteralPath (Join-Path $root 'README.md') -Destination (Join-Path $package 'README.md')
     $archiveName = "HighRefreshFix-$version.zip"
     $archive = Join-Path $staging $archiveName
-    Compress-Archive -LiteralPath (Join-Path $package 'BepInEx'), (Join-Path $package 'README.md') -DestinationPath $archive
+    Compress-Archive -Path (Join-Path $package '*') -DestinationPath $archive
     $dll = Join-Path $plugins 'HighRefreshFix.dll'
     $manifest = [ordered]@{
         version = $version

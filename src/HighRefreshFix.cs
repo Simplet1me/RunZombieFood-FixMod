@@ -4,7 +4,7 @@ using BepInEx;
 using HarmonyLib;
 using UnityEngine;
 
-[BepInPlugin("rz.high-refresh-fix", "High Refresh Movement Fix", "1.1.0")]
+[BepInPlugin("rz.high-refresh-fix", "High Refresh Movement Fix", "1.1.1")]
 public sealed class HighRefreshFix : BaseUnityPlugin
 {
     private static bool physicsNavigation;
@@ -25,13 +25,13 @@ public sealed class HighRefreshFix : BaseUnityPlugin
             harmony.Patch(typeof(PolyNavAgent).GetMethod("get_position", flags), new HarmonyMethod(typeof(HighRefreshFix).GetMethod("PhysicsPosition")), null, null, null, null);
             harmony.Patch(typeof(PolyNavAgent).GetMethod("Start", flags), null, new HarmonyMethod(typeof(HighRefreshFix).GetMethod("InterpolateAgent")), null, null, null);
             CameraFix.Install();
-            Debug.Log("[HighRefreshFix] READY 1.1.0: fixed-step navigation, interpolated actors, per-render LateUpdate camera; fixedDeltaTime=" + Time.fixedDeltaTime);
+            Logger.LogInfo("[HighRefreshFix] READY 1.1.1: fixed-step navigation, interpolated actors, per-render LateUpdate camera; fixedDeltaTime=" + Time.fixedDeltaTime);
         }
         catch (Exception error)
         {
             // Roll back all movement hooks, including FixedUpdate, on setup failure.
             harmony.UnpatchSelf();
-            Debug.LogError("[HighRefreshFix] FAILED: " + error);
+            Logger.LogError("[HighRefreshFix] FAILED: " + error);
         }
     }
 
